@@ -1,19 +1,15 @@
 # Require core library
 require 'middleman-core'
+require 'git'
 
 # Extension namespace
 class MiddlemanRevision < ::Middleman::Extension
-  option :my_option, 'default', 'An example option'
+  option :work_dir, '.', 'Work directory path'
 
   def initialize(app, options_hash={}, &block)
-    # Call super to build options from the options_hash
     super
 
-    # Require libraries only when activated
-    # require 'necessary/library'
-
-    # set up your extension
-    # puts options.my_option
+    app.set :work_dir, options.work_dir
   end
 
   def after_configuration
@@ -28,6 +24,19 @@ class MiddlemanRevision < ::Middleman::Extension
   #   def a_helper
   #   end
   # end
+
+  helpers do
+    def revision
+      rev = '-------'
+      begin
+        repo = Git.open(work_dir)
+        rev = repo.revparse('HEAD')
+        rev = rev[0..6]
+      rescue
+      end
+      rev
+    end
+  end
 end
 
 # Register extensions which can be activated
