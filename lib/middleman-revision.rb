@@ -26,13 +26,15 @@ class MiddlemanRevision < ::Middleman::Extension
   # end
 
   helpers do
-    def revision
-      rev = '-------'
+    def revision(alt: nil)
+      rev = nil
+      rev = alt * 7 unless alt.nil?
       begin
         repo = Git.open(work_dir)
         rev = repo.revparse('HEAD')
         rev = rev[0..6]
-      rescue
+      rescue => e
+        STDERR.puts(e)
       end
       rev
     end
