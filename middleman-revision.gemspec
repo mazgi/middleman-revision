@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Hidenori MATSUKI"]
   s.email       = ["Matsuki.Hidenori@gmail.com"]
   s.homepage    = "http://mazgi.com"
-  # s.summary     = %q{A short summary of your extension}
-  # s.description = %q{A longer description of your extension}
+  s.summary     = %q{VCS Revision reader for Middleman}
+  s.description = %q{VCS Revision reader for Middleman}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
